@@ -85,7 +85,7 @@ class Aggregator:
 
         # for bar graph
 
-    def BarChart(self):
+    def barchart(self):
 
         book = load_workbook(self.worksheet)
         chart1 = BarChart()
