@@ -111,10 +111,13 @@ class Aggregator:
             else:
                 df.to_excel(writer, index=False, sheet_name=MSHEET, startrow=startrow)
         print(f"Added to {MSHEET}.")
-
-        # This block is used to define the function to create the bar graph
-
-    def barchart(self):
+        
+        
+        """
+         This block is used to define the function to create the bar graph
+         """
+        
+        def barchart(self):
 
         book = load_workbook(self.worksheet)
         chart1 = BarChart()
