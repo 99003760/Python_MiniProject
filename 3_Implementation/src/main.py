@@ -144,4 +144,4 @@ for i in range(no_of_inputs):
 
         agg.add_to_master(df_m)
 
-        agg.BarChart()
+        agg.barchart()
