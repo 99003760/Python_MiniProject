@@ -40,7 +40,7 @@ class Aggregator:
     # values of dataframe gets stored in x and we're updating the fields.
 
     def search(self, query, searchid):
-        print(f"Searching {searchid.lower()} `{query}`...")
+        print(f"Searching {searchid.lower()} `{query}`...")   # searchid is converted to lowercase
         fields = {}
         for x in self.dfs.values():
             fields.update(
