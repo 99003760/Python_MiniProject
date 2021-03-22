@@ -39,18 +39,18 @@ It is a Data Set problem that will allow users to retrieve data from data set. H
 ## What:
  *	We are preparing the master excel sheet to search and retrieve data.
  *	For easy search of a particular cell or data of a person.
- *	Provides information of every person details like bio,academics,health. 
+ *	Provides information of every person details like bio,academics,accomodation.
 
 ## When:
-*	evalaution of exams
-*	searching for person information
-*	contact information
+*	Evalaution of exams.
+*	Searching for person information.
+*	Contact information.
 
 ## Where:
 *	To check the information and bio of a person.
 *	Very useful during emergency times.
 *	We can also use it for evaluation of marks using the mail,search the location of person.
-*	
+
 ## How:
 *	Input:- giving the Ps no,name or email of person.
 *	Output: -gives all the relevant information of person related to Ps no, name or email.
