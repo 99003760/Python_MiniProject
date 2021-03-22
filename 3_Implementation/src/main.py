@@ -1,3 +1,28 @@
+# Author: Karisma Kiran(99003760)
+# Contact: karisma.kiran@ltts.com /karismakiran07@gmail.com
+# Date of creation: 22/3/2021
+
+# -------------------------------------------------------------------------------------------------------------#
+# -------------------------------------------------------------------------------------------------------------#
+
+"""
+This program performs the task of putting all the data of a particular candidate from 5 sheets
+to a master sheet provided the user gives the input of name , ps no or email id of that particular candidate.
+Then, MasterSheet file will give bar charts outputs of any two columns/rows combination.
+This programs uses both pandas and openpyxl library and it has object oriented programming concepts such as class,
+object and function.
+"""
+
+# -------------------------------------------------------------------------------------------------------------#
+# -------------------------------------------------------------------------------------------------------------#
+
+"""
+This program uses pandas and openpyxl library and import pandas as pd  
+imports the library and rather than using the name pandas , it's instructed to use the name pd instead.
+From Pandas ExcelWriter is imported in order to write the header in the first master sheet.
+"""
+
+
 # IMPORT
 
 import pandas as pd
@@ -9,7 +34,11 @@ SHEETS = ["Sheet1", "Sheet2", "Sheet3", "Sheet4", "Sheet5"]
 MSHEET = "MasterSheet"
 
 
-# init method is called and reading the excel file
+"""
+This program uses a class named Aggregator where the __init__ function is defined and has three 
+arguments such as self,worksheet, and sheets. The worksheet has 5 sheets and for each sheet the
+specific function is defined in this section. The __init__ method is called and then we're reading the excel file.
+"""
 
 class Aggregator:
     def __init__(self, worksheet, sheets):
@@ -83,7 +112,7 @@ class Aggregator:
                 df.to_excel(writer, index=False, sheet_name=MSHEET, startrow=startrow)
         print(f"Added to {MSHEET}.")
 
-        # for bar graph
+        # This block is used to define the function to create the bar graph
 
     def barchart(self):
 
