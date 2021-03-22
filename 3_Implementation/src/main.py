@@ -34,11 +34,7 @@ SHEETS = ["Sheet1", "Sheet2", "Sheet3", "Sheet4", "Sheet5"]
 MSHEET = "MasterSheet"
 
 
-"""
-This program uses a class named Aggregator where the __init__ function is defined and has three 
-arguments such as self,worksheet, and sheets. The worksheet has 5 sheets and for each sheet the
-specific function is defined in this section. The __init__ method is called and then we're reading the excel file.
-"""
+# init method is called and reading the excel file
 
 class Aggregator:
     def __init__(self, worksheet, sheets):
@@ -69,7 +65,7 @@ class Aggregator:
     # values of dataframe gets stored in x and we're updating the fields.
 
     def search(self, query, searchid):
-        print(f"Searching {searchid.lower()} `{query}`...")   # searchid is converted to lowercase
+        print(f"Searching {searchid.lower()} `{query}`...")    # searchid is converted to lowercase
         fields = {}
         for x in self.dfs.values():
             fields.update(
@@ -92,7 +88,7 @@ class Aggregator:
 
         book = load_workbook(self.worksheet)  # loading the workbook
         with pd.ExcelWriter(self.worksheet, engine="openpyxl", mode="a") as writer:  # opening a Excel Writer instance
-            writer.book = book  # changing the workbook of the writer to our current workbook , file is uploaded
+            writer.book = book  # changing the workbook of the writer to our current workbook, file is uploaded
             writer.sheets = {ws.title: ws for ws in book.worksheets}  # adding the worksheets to it
             # getting the last row if not found set it to 0
             try:
@@ -111,13 +107,10 @@ class Aggregator:
             else:
                 df.to_excel(writer, index=False, sheet_name=MSHEET, startrow=startrow)
         print(f"Added to {MSHEET}.")
-        
-        
-        """
-         This block is used to define the function to create the bar graph
-         """
-        
-        def barchart(self):
+
+        # for bar graph
+
+    def barchart(self):
 
         book = load_workbook(self.worksheet)
         chart1 = BarChart()
