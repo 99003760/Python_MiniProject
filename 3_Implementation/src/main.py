@@ -63,7 +63,7 @@ class Aggregator:
 
         book = load_workbook(self.worksheet)  # loading the workbook
         with pd.ExcelWriter(self.worksheet, engine="openpyxl", mode="a") as writer:  # opening a Excel Writer instance
-            writer.book = book  # changing the workbook of the writer to our current workbook
+            writer.book = book  # changing the workbook of the writer to our current workbook , file is uploaded
             writer.sheets = {ws.title: ws for ws in book.worksheets}  # adding the worksheets to it
             # getting the last row if not found set it to 0
             try:
