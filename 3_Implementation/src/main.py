@@ -97,9 +97,9 @@ class Aggregator:
 
         data = Reference(book[MSHEET], min_col=1, min_row=4,
                          max_col=2, max_row=book[MSHEET].max_row)
-        cats = Reference(book[MSHEET], min_col=1, min_row=2, max_row=7)
+        x = Reference(book[MSHEET], min_col=1, min_row=2, max_row=7)
         chart1.add_data(data, titles_from_data=True)
-        chart1.set_categories(cats)
+        chart1.set_categories(x)
         chart1.shape = 4
         book[MSHEET].add_chart(chart1, "A10")
         book.save(WORKSHEET)
