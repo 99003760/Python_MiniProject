@@ -5,11 +5,20 @@
 # -------------------------------------------------------------------------------------------------------------#
 # -------------------------------------------------------------------------------------------------------------#
 
+# IMPORT
+
+import pandas as pd
+from openpyxl import load_workbook
+from openpyxl.chart import BarChart, Reference
 """
-This program performs the task of putting all the data of a particular candidate from 5 sheets
-to a master sheet provided the user gives the input of name , ps no or email id of that particular candidate.
-Then, MasterSheet file will give bar charts outputs of any two columns/rows combination.
-This programs uses both pandas and openpyxl library and it has object oriented programming concepts such as class,
+This program performs the task of putting
+all the data of a particular candidate from 5 sheets
+to a master sheet provided the user gives the input of name ,
+ps no or email id of that particular candidate.
+Then, MasterSheet file will give bar charts
+outputs of any two columns/rows combination.
+This programs uses both pandas and openpyxl library and
+it has object oriented programming concepts such as class,
 object and function.
 """
 
@@ -17,17 +26,13 @@ object and function.
 # -------------------------------------------------------------------------------------------------------------#
 
 """
-This program uses pandas and openpyxl library and import pandas as pd  
-imports the library and rather than using the name pandas , it's instructed to use the name pd instead.
-From Pandas ExcelWriter is imported in order to write the header in the first master sheet.
+This program uses pandas and openpyxl library
+and import pandas as pd
+imports the library and rather than using the name pandas ,
+it's instructed to use the name pd instead.
+From Pandas ExcelWriter is imported in order
+to write the header in the first master sheet.
 """
-
-
-# IMPORT
-
-import pandas as pd
-from openpyxl import load_workbook
-from openpyxl.chart import BarChart, Reference
 
 WORKSHEET = "PythonSheets.xlsx"
 SHEETS = ["Sheet1", "Sheet2", "Sheet3", "Sheet4", "Sheet5"]
@@ -39,16 +44,18 @@ MSHEET = "MasterSheet"
 class Aggregator:
     def __init__(self, worksheet, sheets):
         self.worksheet, self.sheets = worksheet, sheets
-        self.dfs = pd.read_excel(worksheet, sheet_name=sheets, parse_dates=False)
+        self.dfs = pd.read_excel(worksheet,
+                                 sheet_name=sheets, parse_dates=False)
 
     #  Validation (PS Number) from all sheets
 
     def get_input(self, c=0):
-        query = input("Enter PS Number / Email / Name: ")        # query is what we've provided in input
+        # query is what we've provided in input
+        query = input("Enter PS Number / Email / Name: ")
         if query and c < 3:  # check if user has entered something or not
             try:
-                query = int(query)              # change ps no as integer
-                searchid = "Ps No"              # ps no is saved as searchid
+                query = int(query)   # change ps no as integer
+                searchid = "Ps No"   # ps no is saved as searchid
             except ValueError:
                 if "@" in query:
                     searchid = "Email"
@@ -65,16 +72,19 @@ class Aggregator:
     # values of dataframe gets stored in x and we're updating the fields.
 
     def search(self, query, searchid):
-        print(f"Searching {searchid.lower()} `{query}`...")    # searchid is converted to lowercase
+        # searchid is converted to lowercase
+        print(f"Searching {searchid.lower()} `{query}`...")
         fields = {}
         for x in self.dfs.values():
+            # checking if the query exist in that col or not
             fields.update(
-                x[x[searchid] == query].to_dict(orient="list"))  # checking if the query exist in that col or not
+                x[x[searchid] == query].to_dict(orient="list"))
         # print(fields)
 
         if fields[searchid]:
             print("Found.")
-            return pd.DataFrame.from_dict(fields)  # changing the dict into dataframe
+            # changing the dict into dataframe
+            return pd.DataFrame.from_dict(fields)
 
         print(f"Couldn't find the {searchid.lower()} in sheets!")
         exit()
@@ -87,9 +97,12 @@ class Aggregator:
         df["End Date"] = df["End Date"].dt.strftime("%d/%m/%Y")
 
         book = load_workbook(self.worksheet)  # loading the workbook
-        with pd.ExcelWriter(self.worksheet, engine="openpyxl", mode="a") as writer:  # opening a Excel Writer instance
-            writer.book = book  # changing the workbook of the writer to our current workbook, file is uploaded
-            writer.sheets = {ws.title: ws for ws in book.worksheets}  # adding the worksheets to it
+        # opening a Excel Writer instance
+        with pd.ExcelWriter(self.worksheet,
+                            engine="openpyxl", mode="a") as writer:
+            # changing the workbook of the writer to our current workbook
+            writer.book = book
+            writer.sheets = {ws.title: ws for ws in book.worksheets}
             # getting the last row if not found set it to 0
             try:
                 startrow = writer.sheets[MSHEET].max_row
@@ -105,7 +118,8 @@ class Aggregator:
                     startrow=startrow,
                 )
             else:
-                df.to_excel(writer, index=False, sheet_name=MSHEET, startrow=startrow)
+                df.to_excel(writer, index=False,
+                            sheet_name=MSHEET, startrow=startrow)
         print(f"Added to {MSHEET}.")
 
         # for bar graph
